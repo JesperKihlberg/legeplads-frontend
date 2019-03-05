@@ -1,0 +1,47 @@
+import React from "react";
+import { WMSTileLayer } from "react-leaflet";
+
+interface ILetKortWMSTileLayerDispatchProps {
+
+}
+
+interface ILetKortWMSTileLayerExternalProps {
+  layer: TileLayer;
+  selectedId?: string;
+}
+
+interface ILetKortWMSTileLayerProps extends ILetKortWMSTileLayerExternalProps, ILetKortWMSTileLayerDispatchProps {}
+
+class LetKortWMSTileLayer extends React.Component<ILetKortWMSTileLayerProps, {}> {
+  render() {
+    let additionalLayerProps = {};
+    if (this.props.selectedId) {
+      additionalLayerProps = additionalLayerProps && { cql_filter: "id='" + this.props.selectedId +"'"};
+    }
+    return (
+      <WMSTileLayer
+        url={this.props.layer.url}
+        layers={this.props.layer.layer}
+        format="image/png"
+        transparent={true}
+        {...additionalLayerProps}
+      />
+    );
+  }
+}
+export type TileLayer =
+  | {
+      url: "https://kort.aws.dk/geoserver/aws4_wms/ows";
+      layer:
+        | "adgangsadresser"
+        | "vejnavnelinjer"
+        | "vejnavneomraader"
+        | "vejpunkter"
+        | "vejpunktlinjer"
+        | "vejtilslutningspunkter";
+    }
+  | {
+      url: "https://services.kortforsyningen.dk/forvaltning?ignoreillegallayers=TRUE&transparent=TRUE&login=hvemborher&password=p2AAzpEA9wa7M4s";
+      layer: "BRUGSGRAENSE" | "kommunegraense" | "matrikelskel" | "vejnavne";
+    };
+export default LetKortWMSTileLayer;
