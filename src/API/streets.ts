@@ -19,19 +19,18 @@ const streetsApi = {
       .then(response => response.json())
       .catch(error => error)
       .then(data => data);
-  },
-  getFis() {
-    return;
   }
 };
 
-export interface IAWSStreetFlat {
+export interface IAWSStreetMini {
   id: string;
   darstatus: string;
-  oprettet: Date;
-  ændret: Date;
   navn: string;
   adresseringsnavn: string;
+}
+export interface IAWSStreetFlat extends IAWSStreetMini {
+  oprettet: Date;
+  ændret: Date;
   administrerendekommunekode: string;
   administrerendekommunenavn: string;
   retskrivningskontrol: string;
@@ -47,6 +46,60 @@ export interface IAWSStreetFlat {
   bbox_ymax: number;
   visueltcenter_x: number;
   visueltcenter_y: number;
+}
+
+export interface IAdministrerendekommune {
+  href: string;
+  kode: string;
+  navn: string;
+}
+
+export interface IHistorik {
+  oprettet: Date;
+  ændret: Date;
+}
+
+export interface IVejstykker {
+  href: string;
+  kommunekode: string;
+  kode: string;
+  id: string;
+}
+
+export interface IPostnumre {
+  href: string;
+  nr: string;
+  navn: string;
+}
+
+export interface IOprindelse {
+  kilde: string;
+  tekniskstandard: string;
+  registrering: Date;
+  nøjagtighedsklasse: string;
+}
+
+export interface IBeliggenhed {
+  oprindelse: IOprindelse;
+  vejtilslutningspunkter?: any;
+  geometritype: string;
+}
+
+export interface IAWSStreetFull {
+  id: string;
+  href: string;
+  darstatus: string;
+  navn: string;
+  adresseringsnavn: string;
+  administrerendekommune: IAdministrerendekommune;
+  retskrivningskontrol: string;
+  udtaltvejnavn: string;
+  visueltcenter: number[];
+  bbox: number[];
+  historik: IHistorik;
+  vejstykker: IVejstykker[];
+  postnumre: IPostnumre[];
+  beliggenhed: IBeliggenhed;
 }
 
 export default streetsApi;

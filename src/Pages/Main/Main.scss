@@ -1,3 +1,17 @@
-.map{
-  height: 400px;
+.container {
+  height: 100%;
+}
+.header {
+  height: var(--header-height);
+}
+.main {
+  height: calc(100% - var(--header-height));
+  width: 100%;
+}
+
+.input {
+  background-color: aqua;
+}
+.itemContainer {
+  background-color: aqua;
 }

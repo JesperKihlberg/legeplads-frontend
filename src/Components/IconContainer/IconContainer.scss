@@ -1,0 +1,68 @@
+.container {
+  background-color: #A4B7AF;
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  border: 2px solid #386150;
+  border-radius: 20.5px;
+  transition: max-width 2s ease 0.5s;
+  transition: background 0.8s;
+}
+.container:hover {
+  max-width: 500px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.container:focus {
+  max-width: 500px !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #C8D3CF;
+}
+.container:focus .text {
+  opacity: 1;
+  max-width: 500px !important;
+}
+// FLORAL WHITE
+// #FBF8F3
+// AZUREISH WHITE
+// #CCE7EA
+// OLIVE DRAB (#7)
+// #3D3522
+// TAUPE
+// #4A442D
+
+.container .text {
+  opacity: 0;
+  color: #000;
+  max-width: 0;
+  display: inline-block;
+  text-decoration: none;
+  transition: max-width 0.5s ease-out 0.1s, opacity 0.5s ease-out 0.1s, color;
+  margin-top: 10px;
+  padding-right: 37px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-family: "Raleway", sans-serif;
+}
+.container:hover .text {
+  opacity: 1;
+  max-width: 500px;
+  transition: max-width 0.5s ease-out 0.1s, opacity 0.5s ease-out 0.1s, color 0.2s;
+}
+.text span {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.icon {
+  width: 23px;
+  height: 23px;
+  background-color: #386150;
+  padding: 5px;
+  border: 2px solid  white;
+  border-radius: 20.5px;
+  float: left;
+}
+.img {
+  filter: invert(100%) sepia(10%) saturate(2%) hue-rotate(18deg) brightness(115%) contrast(100%);
+  height: 25px;
+}

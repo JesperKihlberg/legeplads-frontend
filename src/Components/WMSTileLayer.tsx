@@ -1,13 +1,11 @@
 import React from "react";
 import { WMSTileLayer } from "react-leaflet";
 
-interface ILetKortWMSTileLayerDispatchProps {
-
-}
+interface ILetKortWMSTileLayerDispatchProps {}
 
 interface ILetKortWMSTileLayerExternalProps {
   layer: TileLayer;
-  selectedId?: string;
+  filter?: string;
 }
 
 interface ILetKortWMSTileLayerProps extends ILetKortWMSTileLayerExternalProps, ILetKortWMSTileLayerDispatchProps {}
@@ -15,8 +13,12 @@ interface ILetKortWMSTileLayerProps extends ILetKortWMSTileLayerExternalProps, I
 class LetKortWMSTileLayer extends React.Component<ILetKortWMSTileLayerProps, {}> {
   render() {
     let additionalLayerProps = {};
-    if (this.props.selectedId) {
-      additionalLayerProps = additionalLayerProps && { cql_filter: "id='" + this.props.selectedId +"'"};
+    const filter = this.props.filter;
+
+      if (this.props.filter) {
+      additionalLayerProps = additionalLayerProps && {
+        cql_filter: filter
+      };
     }
     return (
       <WMSTileLayer

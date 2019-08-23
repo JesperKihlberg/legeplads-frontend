@@ -1,0 +1,53 @@
+{
+  "id": "831a760e-4e3f-42e8-a9a5-0b771f72880a",
+  "href": "https://dawa.aws.dk/navngivneveje/831a760e-4e3f-42e8-a9a5-0b771f72880a",
+  "darstatus": "gældende",
+  "navn": "Rentemestervej",
+  "adresseringsnavn": "Rentemestervej",
+  "administrerendekommune": {
+  "href": "https://dawa.aws.dk/kommuner/101",
+  "kode": "0101",
+  "navn": "København"
+  },
+  "retskrivningskontrol": "Godkendt",
+  "udtaltvejnavn": "Rentemestervej",
+  "visueltcenter": [
+  12.52751346,
+  55.70688009
+  ],
+  "bbox": [
+  12.51663793,
+  55.70400354,
+  12.53838263,
+  55.70951436
+  ],
+    "historik": {
+  "oprettet": "1900-01-01T12:00:00.000Z",
+  "ændret": "2019-01-22T14:59:17.886Z"
+  },
+  "vejstykker": [
+  {
+  "href": "https://dawa.aws.dk/vejstykker/0101/5804",
+  "kommunekode": "0101",
+  "kode": "5804",
+  "id": "5c994b36-4eae-11e8-93fd-066cff24d637"
+  }
+  ],
+  "postnumre": [
+  {
+  "href": "https://dawa.aws.dk/postnumre/2400",
+  "nr": "2400",
+  "navn": "København NV"
+  }
+  ],
+  "beliggenhed": {
+  "oprindelse": {
+  "kilde": "Ekstern",
+  "tekniskstandard": "NO",
+  "registrering": "2019-01-22T14:59:17.886Z",
+  "nøjagtighedsklasse": "B"
+  "},"
+  "vejtilslutningspunkter": null,
+  "geometritype": "vejnavnelinje"
+  }
+  }
