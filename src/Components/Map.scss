@@ -45,12 +45,12 @@
 //   filter: invert(100%) sepia(10%) saturate(2%) hue-rotate(18deg) brightness(115%) contrast(100%);
 //   height: 25px;
 // }
-.iconContainer {
+.PlaygroundMapElement {
   background-color: transparent;
   z-index: 500 !important;
   transition: z-index 0.5s step-end;
 }
-.iconContainer:hover {
+.PlaygroundMapElement:hover {
   z-index: 1000 !important;
   transition: z-index 0.5s step-start;
 }

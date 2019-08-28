@@ -9,7 +9,7 @@ import streetsApi, { IAWSStreetFlat } from "API/streets";
 import { LatLngBoundsExpression } from "leaflet";
 import { GeoJsonObject } from "geojson";
 import GeoJSONLayer from "./GeoJSONLayer";
-import IconContainer from "./IconContainer/IconContainer";
+import PlaygroundMapElement from "./PlaygroundMapElement/PlaygroundMapElement";
 const styles = require("./Map.scss");
 // const icon = require("favicon.ico");
 const marker = require("./graphiqlfavicon.png");
@@ -185,15 +185,15 @@ class LocalMap extends React.Component<ILocalMapProps, ILocalMapState> {
           />
           <GeoJSONLayer
             data={geoJsonCop as any}
-            renderIconElement={IconContainer}
+            renderIconElement={PlaygroundMapElement}
             renderPopupElement={()=><div>Hej</div>}
-            styles={{ icon: styles.iconContainer }}
+            styles={{ icon: styles.PlaygroundMapElement }}
           />
           <GeoJSONLayer
             data={geoJsonFrb as any}
-            renderIconElement={IconContainer}
+            renderIconElement={PlaygroundMapElement}
             renderPopupElement={()=><div>Hej</div>}
-            styles={{ icon: styles.iconContainer }}
+            styles={{ icon: styles.PlaygroundMapElement }}
           />
           {/* <GeoJSON data={geoJsonFrb} onEachFeature={this.onEachFeature.bind(this)} pointToLayer={this.pointToLayer} /> */}
           {/* https://kk.sites.itera.dk/apps/kk_legepladser_ny/punkter.php?action=all */}
