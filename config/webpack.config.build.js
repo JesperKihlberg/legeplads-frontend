@@ -13,10 +13,10 @@ const { CheckerPlugin } = require("awesome-typescript-loader");
 let libraryName = "package";
 let outputFile = libraryName + ".js";
 
-const isTypescript = function(fileName) {
+const isTypescript = function (fileName) {
   return (fileName.endsWith(".ts") || fileName.endsWith(".tsx")) && !fileName.endsWith(".d.ts");
 };
-const isTypescriptOrJavascript = function(fileName) {
+const isTypescriptOrJavascript = function (fileName) {
   return isTypescript(fileName) || fileName.endsWith(".js");
 };
 function srcPath(subdir) {
@@ -55,7 +55,8 @@ module.exports = {
       Components: srcPath("Components"),
       Pages: srcPath("Pages"),
       Redux: srcPath("Redux"),
-      Core: srcPath("Core")
+      Core: srcPath("Core"),
+      Containers: srcPath("Containers")
     }
   },
   module: {

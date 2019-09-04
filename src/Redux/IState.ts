@@ -1,7 +1,9 @@
 import IMainState from "Pages/Main/IState";
+import IMapState from "Components/Map/IState";
 
 interface IState {
   main: IMainState;
+  map: IMapState;
   // wizard: IWizardState;
   // searchMenu: ISearchMenuState;
   // company: ICompanyState;

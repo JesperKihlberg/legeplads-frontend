@@ -1,5 +1,5 @@
 import React from "react";
-import MapContainer from "Components/MapContainer";
+import MapContainer from "Components/Map/MapContainer";
 import Header from "./Header/Header";
 // import AutoDropdown from "react-autodropdown";
 const styles = require("./Main.scss");

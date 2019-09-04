@@ -34,7 +34,8 @@ module.exports = {
       Components: srcPath("Components"),
       Pages: srcPath("Pages"),
       Redux: srcPath("Redux"),
-      Core: srcPath("Core")
+      Core: srcPath("Core"),
+      Containers: srcPath("Containers")
     }
   },
   module: {

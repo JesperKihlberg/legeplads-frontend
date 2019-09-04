@@ -6,6 +6,7 @@ import Main from "Pages/Main/Main";
 
 // Apply any type to work around missing applyRouterMiddleware in d.t.s file.
 import * as ReactRouterTS from "react-router";
+import LatLngUrlContainer from "Containers/LatLngUrlContainer";
 const Route = ReactRouterTS.Route as any;
 
 interface IAppRootInternalProps {}
@@ -18,7 +19,10 @@ class AppRoutes extends React.Component<IAppRootExternalProps & IAppRootInternal
   render() {
     return (
       <HashRouter>
-        <Route exact path="/" component={Main} />
+        <React.Fragment>
+          <Route path="/" component={Main} />
+          <Route path={`/lat/:lat/lng/:lng/z/:zoom`} component={LatLngUrlContainer} />
+        </React.Fragment>
       </HashRouter>
     );
   }

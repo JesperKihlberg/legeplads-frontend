@@ -4,9 +4,9 @@ import { Provider } from "react-redux";
 
 import { Store, createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-import reducers from "./Redux/Reducers";
 import createSagaMiddleware from "redux-saga";
 
+import reducers from "./Redux/Reducers";
 import mySaga from "./Redux/sagas";
 
 // Apply any type to work around missing applyRouterMiddleware in d.t.s file.

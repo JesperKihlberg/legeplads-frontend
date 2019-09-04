@@ -1,34 +1,36 @@
 import React, { createRef } from "react";
 import ReactDOMServer from "react-dom/server";
-import L, { divIcon } from "leaflet";
-import { GeoJSON, Map, Marker, Popup, TileLayer, ScaleControl, Rectangle, CircleMarker } from "react-leaflet";
+// import L, { divIcon } from "leaflet";
+import { GeoJSON, Map, Marker, Popup, TileLayer, ScaleControl, Rectangle, CircleMarker, ZoomControl } from "react-leaflet";
 // import WMSTileLayer from "Components/WMSTileLayer";
-import RoadLayer from "./RoadLayer";
+import RoadLayer from "../RoadLayer";
 import addressApi from "API/aws";
 import streetsApi, { IAWSStreetFlat } from "API/streets";
 import { LatLngBoundsExpression } from "leaflet";
 import { GeoJsonObject } from "geojson";
-import GeoJSONLayer from "./GeoJSONLayer";
-import PlaygroundMapElement from "./PlaygroundMapElement/PlaygroundMapElement";
+import GeoJSONLayer from "./GeoJSONLayer/GeoJSONLayer";
+import PlaygroundMapElement from "../PlaygroundMapElement/PlaygroundMapElement";
 const styles = require("./Map.scss");
 // const icon = require("favicon.ico");
-const marker = require("./graphiqlfavicon.png");
+const marker = require("../graphiqlfavicon.png");
 
-const copenhagen = require("./copenhagen.json");
-const frederiksberg = require("./frederiksberg.json");
+const copenhagen = require("../copenhagen.json");
+const frederiksberg = require("../frederiksberg.json");
 export interface ILocalMapDispatchProps {
   mapClick?: (lat: number, lng: number) => void;
+  onMoveEnd?: (lat: number, lng: number, zoom: number) => void;
 }
 export interface ILocalMapValueProps {
-  mapCenter?: number[];
-  mapZoom?: number;
+  lat: number;
+  lng: number;
+  zoom: number;
   mapSelectedCoord?: number[];
 }
 
 interface ILocalMapProps extends ILocalMapDispatchProps, ILocalMapValueProps {}
 
 interface ILocalMapState {
-  zoomLevel: number;
+  // zoomLevel: number;
   selectedRoad?: IAWSStreetFlat;
   bounds?: LatLngBoundsExpression;
 }
@@ -60,15 +62,15 @@ class LocalMap extends React.Component<ILocalMapProps, ILocalMapState> {
   constructor(props: ILocalMapProps) {
     super(props);
     this.state = {
-      zoomLevel: props.mapZoom,
+      // zoomLevel: props.mapZoom,
       bounds: [[55.70400354, 12.51663793], [55.70951436, 12.53838263]]
     };
   }
-  componentDidUpdate(prevProps: ILocalMapProps) {
-    if (this.props.mapZoom && this.props.mapZoom !== prevProps.mapZoom) {
-      this.setState({ zoomLevel: this.props.mapZoom });
-    }
-  }
+  // componentDidUpdate(prevProps: ILocalMapProps) {
+  //   if (this.props.mapZoom && this.props.mapZoom !== prevProps.mapZoom) {
+  //     this.setState({ zoomLevel: this.props.mapZoom });
+  //   }
+  // }
   mapClick(e: any) {
     // console.log(e);
     // addressApi.reverseGeocode(e.latlng.lat, e.latlng.lng).then(res => {
@@ -83,14 +85,16 @@ class LocalMap extends React.Component<ILocalMapProps, ILocalMapState> {
 
     this.props.mapClick(e.latlng.lat, e.latlng.lng);
   }
-  onZoom = (e: { target: { _zoom: number } }) => {
-    console.log(e, (e.target as any).getBounds());
-    this.setState({ zoomLevel: e.target._zoom });
-    this.setState({ bounds: (e.target as any).getBounds() });
-  };
-  onDrag = (e: any) => {
-    console.log(e);
-  };
+  // onZoom = (e: { target: { _zoom: number } }) => {
+  //   this.props.onZoom(e.target._zoom);
+  //   // console.log(e, (e.target as any).getBounds());
+  //   // this.setState({ zoomLevel: e.target._zoom });
+  //   // this.setState({ bounds: (e.target as any).getBounds() });
+  // };
+  // onDrag = (e: any) => {
+  //   this.props.onDrag(e.target._zoom);
+  //   console.log(e);
+  // };
   // onEachFeature = (feature: any, layer: any) => {
   //   layer.on({
   //     mouseover: (e: any) => console.log(e),
@@ -162,7 +166,6 @@ class LocalMap extends React.Component<ILocalMapProps, ILocalMapState> {
     //     </Popup>
     //   </Marker>
     // ));
-
     return (
       <div className={styles.mapContainer}>
         <Map
@@ -174,9 +177,16 @@ class LocalMap extends React.Component<ILocalMapProps, ILocalMapState> {
                 ]
               : [[55.70400354, 12.51663793], [55.70951436, 12.53838263]]
           }
+          zoom={this.props.zoom}
+          center={{ lat: this.props.lat, lng: this.props.lng }}
           onclick={this.mapClick.bind(this)}
-          onzoomend={this.onZoom}
-          ondragend={this.onDrag}
+          // onzoomend={this.onZoom}
+          onmoveend={e => {
+            const center = e.target.getCenter();
+            const zoom = e.target.getZoom();
+            console.log("moveend", center.lat, center.lng, zoom);
+            this.props.onMoveEnd(center.lat, center.lng, zoom);
+          }}
         >
           <ScaleControl position="bottomright" />
           <TileLayer
@@ -186,13 +196,13 @@ class LocalMap extends React.Component<ILocalMapProps, ILocalMapState> {
           <GeoJSONLayer
             data={geoJsonCop as any}
             renderIconElement={PlaygroundMapElement}
-            renderPopupElement={()=><div>Hej</div>}
+            renderPopupElement={() => <div>Hej</div>}
             styles={{ icon: styles.PlaygroundMapElement }}
           />
           <GeoJSONLayer
             data={geoJsonFrb as any}
             renderIconElement={PlaygroundMapElement}
-            renderPopupElement={()=><div>Hej</div>}
+            renderPopupElement={() => <div>Hej</div>}
             styles={{ icon: styles.PlaygroundMapElement }}
           />
           {/* <GeoJSON data={geoJsonFrb} onEachFeature={this.onEachFeature.bind(this)} pointToLayer={this.pointToLayer} /> */}
